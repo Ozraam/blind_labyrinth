@@ -1,14 +1,10 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+mod player;
+mod map;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+use player::Player;
+use map::Map;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+pub fn run() {
+    let player = Player::new("Player 1");
+    println!("{} has {} life", player.name(), player.life());
 }
