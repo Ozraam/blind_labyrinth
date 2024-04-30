@@ -1,0 +1,10 @@
+@life: 100
+@max-life: 100
+@weapon: stick
+@armor: none
+@level: 1
+@exp: 0
+@exp-to-next-level: 100
+@inventory
+gold 10
+heal 1

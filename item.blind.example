@@ -1,0 +1,53 @@
+@item
+@weapon
+@treasure
+@name: stick
+@description: a good stick
+@atk: 10
+@value: 1
+
+@item
+@armor
+@treasure
+@name: helmet
+@description: a good helmet
+@dfs: 10
+@value: 5
+
+@item
+@gold
+@value: 1
+
+@item
+@effect
+@name: heal
+@description: a heal Potion
+@value: 10
+@effect: heal 10
+
+@item
+@effect
+@name: heal
+@description: a heal Potion
+@value: 10
+@effect: damage 10
+
+@item
+@effect
+@name: heal
+@description: a heal Potion
+@value: 10
+@effect: teleport random
+
+@item
+@effect
+@name: heal
+@description: a heal Potion
+@value: 10
+@effect: teleport start
+
+@item
+@exp
+@name: experience
+@description: experience
+@value: 1

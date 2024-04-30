@@ -1,0 +1,6 @@
+@item
+@weapon
+@name: slimeWeapon
+@description: The weapon of the slime
+@atk: 5
+@value: 0

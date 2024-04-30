@@ -1,0 +1,6 @@
+@item
+@effect
+@name: heal
+@description: a heal Potion
+@value: 10
+@effect: heal 10

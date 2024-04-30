@@ -1,0 +1,5 @@
+@monster
+@name: slime
+@life: 10
+@weapon: slimeWeapon
+@drop: exp,30
