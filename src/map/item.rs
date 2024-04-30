@@ -1,3 +1,5 @@
+use std::io::BufRead;
+
 use crate::player;
 use super::Monster;
 use crate::map::Position;
