@@ -1,18 +1,18 @@
-use std::io::BufRead;
-
 use crate::player;
-use super::Monster;
+use super::{Map, Monster};
 use crate::map::Position;
 
 #[derive(Debug, PartialEq, Eq, Clone)]
 pub enum Effect {
+    None,
     Heal(i32),
     Damage(i32),
     Teleport(Position),
+    RandomTeleport,
 }
 
 impl Effect {
-    pub fn apply(&self, player: &mut player::Player, monster: Option<&mut Monster>) {
+    pub fn apply(&self, map: Map, player: &mut player::Player, monster: Option<&mut Monster>) {
         match self {
             Effect::Heal(heal) => {
                 player.take_damage(-*heal); 
@@ -24,6 +24,11 @@ impl Effect {
                 }
             },
             Effect::Teleport(position) => player.move_to(*position),
+            Effect::RandomTeleport => {
+                let random_position = map.get_random_position();
+                player.move_to(random_position.clone());
+            },
+            _ => (),
         }
     }
 }
@@ -69,7 +74,7 @@ impl Item {
             name: "Gold".to_string(),
             description: "A pile of gold".to_string(),
             value,
-            type_: ItemType::Gold(value),
+            type_: ItemType::Gold(1),
         }
     }
 
@@ -172,23 +177,24 @@ mod tests {
     #[test]
     fn test_effect_apply_heal() {
         let mut player = player::Player::new("Player");
-        let monster = Monster::new("Monster", 10, Item::new_weapon("Weapon", "", 0, 10), None, 1);
+        let monster = Monster::new("Monster", 10, Item::new_weapon("Weapon", "", 0, 10), None, 1, 1);
         let event = map::Event::Monster(monster);
         let mut map = map::Map::new();
         map.add_event(Position::new(0, 0), event);
         map.do_event(&Position::new(0, 0), &mut player);
 
         let effect = Effect::Heal(5);
-        effect.apply(&mut player, None);
+        effect.apply(map, &mut player, None);
         assert_eq!(player.life(), 95);
     }
 
     #[test]
     fn test_effect_apply_damage() {
         let mut player = player::Player::new("Player");
-        let mut monster = Monster::new("Monster", 10, Item::new_weapon("Weapon", "", 0, 5), None, 0);
+        let mut monster = Monster::new("Monster", 10, Item::new_weapon("Weapon", "", 0, 5), None, 0, 1);
         let effect = Effect::Damage(5);
-        effect.apply(&mut player, Some(&mut monster));
+        let map = map::Map::new();
+        effect.apply(map, &mut player, Some(&mut monster));
         assert_eq!(monster.life(), 5);
     }
 
@@ -196,7 +202,8 @@ mod tests {
     fn test_effect_apply_teleport() {
         let mut player = player::Player::new("Player");
         let effect = Effect::Teleport(Position::new(1, 1));
-        effect.apply(&mut player, None);
+        let map = map::Map::new();
+        effect.apply(map, &mut player, None);
         assert_eq!(player.position(), &Position::new(1, 1));
     }
 }

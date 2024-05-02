@@ -7,6 +7,12 @@ pub enum Token {
     Armor,
     Gold,
     Effect,
+    Heal,
+    Damage,
+    Teleport,
+    Start,
+    Random,
+
     Exp,
 
     Treasure,
@@ -14,6 +20,7 @@ pub enum Token {
     Monster,
     Life,
     Drop,
+    Rareness,
 
     Atk,
     Def,
@@ -50,11 +57,18 @@ impl Lexer {
         table.insert("@effect".to_string(), Token::Effect);
         table.insert("@exp".to_string(), Token::Exp);
 
+        table.insert("@heal".to_string(), Token::Heal);
+        table.insert("@damage".to_string(), Token::Damage);
+        table.insert("@teleport".to_string(), Token::Teleport);
+        table.insert("@start".to_string(), Token::Start);
+        table.insert("@random".to_string(), Token::Random);
+
         table.insert("@treasure".to_string(), Token::Treasure);
 
         table.insert("@monster".to_string(), Token::Monster);
         table.insert("@life".to_string(), Token::Life);
         table.insert("@drop".to_string(), Token::Drop);
+        table.insert("@rareness".to_string(), Token::Rareness);
 
         table.insert("@atk".to_string(), Token::Atk);
         table.insert("@def".to_string(), Token::Def);
@@ -70,7 +84,7 @@ impl Lexer {
         Lexer {
             input,
             position: 0,
-            table: table,
+            table,
         }
     }
 

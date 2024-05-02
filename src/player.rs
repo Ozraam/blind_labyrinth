@@ -7,6 +7,7 @@ pub enum Direction {
     Right,
 }
 
+#[derive(Debug, PartialEq, Eq)]
 pub struct Player {
     name: String,
     life: i32,
@@ -33,6 +34,21 @@ impl Player {
             experience: 0,
             level: 1,
             next_level: 100,
+        }
+    }
+
+    pub fn new_all(name: &str, life: i32, max_life: i32, position: Position, weapon: Option<Item>, armor: Option<Item>, inventory: Vec<Item>, experience: i32, level: i32, next_level: i32) -> Player {
+        Player {
+            name: name.to_string(),
+            life,
+            max_life,
+            position,
+            weapon,
+            armor,
+            inventory,
+            experience,
+            level,
+            next_level,
         }
     }
 

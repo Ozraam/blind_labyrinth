@@ -2,4 +2,5 @@
 @name: slime
 @life: 10
 @weapon: slimeWeapon
-@drop: exp,30
+@drop: exp 30
+@rareness: 1
